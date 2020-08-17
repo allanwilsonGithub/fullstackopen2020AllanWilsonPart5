@@ -20,11 +20,8 @@ const App = () => {
     console.log('logging in with', username, password)
   }
 
-  return (
-    <div>
-      <h2>blogs</h2>
-
-            <form onSubmit={handleLogin}>
+  const loginForm = () => (
+      <form onSubmit={handleLogin}>
         <div>
           username
             <input
@@ -45,10 +42,22 @@ const App = () => {
         </div>
         <button type="submit">login</button>
       </form>
+  )
+
+  const blogDisplay = () => (
+      <div>
+      <h2>blogs</h2>
 
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
+    </div>
+  )
+
+  return (
+    <div>
+    {user === null && loginForm()}
+    {user !== null && blogDisplay()}
     </div>
   )
 }
