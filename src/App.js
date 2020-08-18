@@ -99,10 +99,14 @@ const App = () => {
     </div>
   )
 
+  const addBlog = () => {
+    blogService.createNew(blogToAddTitle, blogToAddAuthor, blogToAddUrl, username, user.id)
+  }
+
   const createNewBlog = () => (
     <div>
     <h2>Create new blog</h2>
-    <form onSubmit={blogService.createNew}>
+    <form onSubmit={addBlog}>
         <div>
           Title&nbsp;
             <input

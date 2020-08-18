@@ -12,17 +12,16 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
-const createNew = () => {
+const createNew = (blogToAddTitle, blogToAddAuthor, blogToAddUrl, username, userId) => {
   const request = 
   axios
   .post(baseUrl, {
-    'title': 'Robert THE Burns 22222222222222222',
-    'author': 'Robert THE Burns 222222222222222',
-    'url': 'http://burns.gov/blog/222222222222',
-    'likes': 1,
+    'title': blogToAddTitle,
+    'author': blogToAddAuthor,
+    'url': blogToAddUrl,
     'user': {
-      'username': 'allan 123',
-      'id': '5f20297efe38103799d7c8cd'
+      'username': username,
+      'id': userId
     }
   },
   {
