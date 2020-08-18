@@ -16,12 +16,25 @@ const App = () => {
     )  
   }, [])
 
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogAppUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      blogService.setToken(user.token)
+    }
+  }, [])
+
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
       const user = await loginService.login({
         username, password,
       })
+
+      window.localStorage.setItem(
+        'loggedBlogAppUser', JSON.stringify(user)
+      ) 
 
       setUser(user)
       setUsername('')
@@ -34,10 +47,25 @@ const App = () => {
     }
   }
 
+  const handleLogout = async () => {
+    try {
+      window.localStorage.removeItem('loggedBlogAppUser')
+
+      setUser(null)
+      setUsername('')
+      setPassword('')
+    } catch (exception) {
+      setErrorMessage('Error during logout')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
+  }
+
   const loginForm = () => (
       <form onSubmit={handleLogin}>
         <div>
-          username
+          username&nbsp;
             <input
             type="text"
             value={username}
@@ -46,7 +74,7 @@ const App = () => {
           />
         </div>
         <div>
-          password
+          password&nbsp;
             <input
             type="password"
             value={password}
@@ -79,8 +107,9 @@ const App = () => {
   
     return (
       <div>
-        <p>{user.name} logged in</p>
+        <p>{user.name} logged in <button onClick={handleLogout}>Logout</button></p>
           {blogDisplay()}
+        
       </div>
     )
 }
