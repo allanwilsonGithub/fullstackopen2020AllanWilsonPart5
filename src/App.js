@@ -9,6 +9,9 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
+  const [blogToAddTitle, setblogToAddTitle] = useState('')
+  const [blogToAddAuthor, setBlogToAddAuthor] = useState('')
+  const [blogToAddUrl, setBlogToAddUrl] = useState('')
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -96,6 +99,44 @@ const App = () => {
     </div>
   )
 
+  const createNewBlog = () => (
+    <div>
+    <h2>Create new blog</h2>
+    <form onSubmit={blogService.createNew}>
+        <div>
+          Title&nbsp;
+            <input
+            type="text"
+            value={blogToAddTitle}
+            name="Title"
+            onChange={({ target }) => setblogToAddTitle(target.value)}
+          />
+        </div>
+        <div>
+          Author&nbsp;
+            <input
+            type="text"
+            value={blogToAddAuthor}
+            name="Title"
+            onChange={({ target }) => setBlogToAddAuthor(target.value)}
+          />
+        </div>
+        <div>
+          URL&nbsp;
+            <input
+            type="text"
+            value={blogToAddUrl}
+            name="Title"
+            onChange={({ target }) => setBlogToAddUrl(target.value)}
+          />
+        </div>
+        <button type="submit">Create</button>
+      </form>
+  </div>
+)
+
+  
+
   if (user === null) {
     return (
       <div>
@@ -109,6 +150,7 @@ const App = () => {
       <div>
         <p>{user.name} logged in <button onClick={handleLogout}>Logout</button></p>
           {blogDisplay()}
+          {createNewBlog()}
         
       </div>
     )
