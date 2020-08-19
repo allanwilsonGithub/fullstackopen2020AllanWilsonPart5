@@ -31,6 +31,7 @@ const createNew = (blogToAddTitle, blogToAddAuthor, blogToAddUrl, id, user) => {
     }
   })
 
+  
   return request.then(response => response.data)
 }
 
