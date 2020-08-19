@@ -13,10 +13,7 @@ const getAll = () => {
 }
 
 const createNew = (blogToAddTitle, blogToAddAuthor, blogToAddUrl, id, user) => {
-  console.log(blogToAddTitle, blogToAddAuthor, blogToAddUrl, id, user)
-  console.log(token)
   setToken(user.token)
-  console.log(token)
   const request = 
   axios
   .post(baseUrl, {
