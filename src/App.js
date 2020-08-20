@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
-import userService from './services/users'
 import './App.css'
 
 const App = () => {
@@ -11,7 +10,6 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [users, setUsers] = useState(null)
   const [blogToAddTitle, setblogToAddTitle] = useState('')
   const [blogToAddAuthor, setBlogToAddAuthor] = useState('')
   const [blogToAddUrl, setBlogToAddUrl] = useState('')
@@ -41,12 +39,6 @@ const App = () => {
       setUser(user)
       blogService.setToken(user.token)
     }
-  }, [])
-
-  useEffect(() => {
-    userService.getAll().then(users =>
-      setUsers( users )
-    )  
   }, [])
 
   const handleLogin = async (event) => {
@@ -121,9 +113,7 @@ const App = () => {
   )
 
   const addBlog = () => {
-    const currentUser = users.filter( item => item.username === user.username)
-    blogService.createNew(blogToAddTitle, blogToAddAuthor, blogToAddUrl, currentUser[0].id, user)
-
+    blogService.createNew(blogToAddTitle, blogToAddAuthor, blogToAddUrl, user)
 
     setErrorMessage(`New blog added!`)
     setTimeout(() => {
