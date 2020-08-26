@@ -14,9 +14,6 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [blogToAddTitle, setblogToAddTitle] = useState('')
-  const [blogToAddAuthor, setBlogToAddAuthor] = useState('')
-  const [blogToAddUrl, setBlogToAddUrl] = useState('')
   const [loginVisible, setLoginVisible] = useState(false)
 
   const Notification = ({ message }) => {
@@ -95,16 +92,6 @@ const App = () => {
     </div>
   )
 
-  const addBlog = () => {
-    blogService.createNew(blogToAddTitle, blogToAddAuthor, blogToAddUrl, user)
-
-    setErrorMessage(`New blog added!`)
-    setTimeout(() => {
-      setErrorMessage(null)
-    }, 5000)
-    
-  }
-
 
 
   const loginForm = () => {
@@ -148,13 +135,7 @@ const App = () => {
 
         <Togglable buttonLabel="New Blog">
           <CreateBlogForm
-              onSubmit={addBlog}
-              blogToAddUrl={blogToAddUrl}
-              blogToAddAuthor={blogToAddAuthor}
-              handleBlogTitleChange={({ target }) => setblogToAddTitle(target.value)}
-              handleBlogUrlChange={({ target }) => setBlogToAddUrl(target.value)}
-              handleBlogAuthorChange={({ target }) => setBlogToAddAuthor(target.value)}
-          />
+              createBlog setErrorMessage={setErrorMessage} user={user}/>
         </Togglable>
         
       </div>
