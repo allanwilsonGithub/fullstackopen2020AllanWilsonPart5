@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import LoginForm from './components/LoginForm'
+import CreateBlogForm from './components/CreateBlogForm'
 import blogService from './services/blogs'
 import loginService from './services/login'
+import Togglable from './components/Togglable'
 
 import './App.css'
 
@@ -103,41 +105,7 @@ const App = () => {
     
   }
 
-  const createNewBlog = () => (
-    <div>
-    <h2>Create new blog</h2>
-    <form onSubmit={addBlog}>
-        <div>
-          Title&nbsp;
-            <input
-            type="text"
-            value={blogToAddTitle}
-            name="Title"
-            onChange={({ target }) => setblogToAddTitle(target.value)}
-          />
-        </div>
-        <div>
-          Author&nbsp;
-            <input
-            type="text"
-            value={blogToAddAuthor}
-            name="Title"
-            onChange={({ target }) => setBlogToAddAuthor(target.value)}
-          />
-        </div>
-        <div>
-          URL&nbsp;
-            <input
-            type="text"
-            value={blogToAddUrl}
-            name="Title"
-            onChange={({ target }) => setBlogToAddUrl(target.value)}
-          />
-        </div>
-        <button type="submit">Create</button>
-      </form>
-  </div>
-)
+
 
   const loginForm = () => {
     const hideWhenVisible = { display: loginVisible ? 'none' : '' }
@@ -177,7 +145,17 @@ const App = () => {
         <Notification message={errorMessage} />
         <p>{user.name} logged in <button onClick={handleLogout}>Logout</button></p>
           {blogDisplay()}
-          {createNewBlog()}
+
+        <Togglable buttonLabel="New Blog">
+          <CreateBlogForm
+              onSubmit={addBlog}
+              blogToAddUrl={blogToAddUrl}
+              blogToAddAuthor={blogToAddAuthor}
+              handleBlogTitleChange={({ target }) => setblogToAddTitle(target.value)}
+              handleBlogUrlChange={({ target }) => setBlogToAddUrl(target.value)}
+              handleBlogAuthorChange={({ target }) => setBlogToAddAuthor(target.value)}
+          />
+        </Togglable>
         
       </div>
     )
