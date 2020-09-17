@@ -80,39 +80,14 @@ const App = () => {
     }
   }
 
-  const toggleBlogVisible = blog => {
-    {blogs.map(currBlog => {
-      if (currBlog.id === blog.id) {
-        if (!blog.visible) {
-          blog.visible = true
-        } else {
-          blog.visible = !blog.visible
-        }
-      }
-    })}
-    setBlogs(blogs)
-  }
-
   const blogDisplay = () => (
       <div>
       <h2>Blogs</h2>
       {blogs.map(blog => {
-        console.log(blog)
-        const blogNotVisible = { display: blog.visible ? 'none' : '' }
-        const blogVisible = { display: blog.visible ? '' : 'none' }
           return (
-              <div key={blog.id}>
-                <Blog blog={blog}/>
-                <button onClick={() => toggleBlogVisible(blog)}>view</button>
-                <div>
-                  <div style={blogNotVisible}>
-                    <p>NO DETAILS</p>
-                  </div>
-                  <div style={blogVisible}>
-                    <p>DETAILS</p>
-                  </div>
+                <div key={blog.id}>
+                  <Blog blog={blog}/>
                 </div>
-              </div>
             )
         })}
     </div>
