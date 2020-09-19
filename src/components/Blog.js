@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import blogService from "../services/blogs";
 
 const Blog = ({ blog }) => {
   const [expanded, setExpanded] = useState(false)
@@ -17,7 +18,13 @@ const Blog = ({ blog }) => {
   }
 
   const onLikeClick = () => {
-    console.log('Like clicked')
+          blogService
+              .addLike(blogToAddTitle, blogToAddAuthor, blogToAddUrl, user, 99)
+
+          setErrorMessage(`Likes increased by 1 !`)
+          setTimeout(() => {
+              setErrorMessage(null)
+          }, 5000)
   }
 
   const showWhenExpanded = {
