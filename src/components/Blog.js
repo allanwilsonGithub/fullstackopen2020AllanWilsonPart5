@@ -12,33 +12,28 @@ const Blog = ({ blog }) => {
         marginBottom: 5
     }
 
-  const onClick = () => {
+  const onViewClick = () => {
     console.log('View clicked')
     setExpanded(!expanded)
   }
 
-  const onLikeClick = () => {
+  const onLikeClick = ({blog}) => {
+      console.log('OnLikeClick :', blog)
           blogService
-              .addLike(blogToAddTitle, blogToAddAuthor, blogToAddUrl, user, 99)
-
-          setErrorMessage(`Likes increased by 1 !`)
-          setTimeout(() => {
-              setErrorMessage(null)
-          }, 5000)
+              .addLike({blog})
   }
 
   const showWhenExpanded = {
     display: expanded ? '' : 'none'
   }
-  console.log('showWhenExpanded: ', showWhenExpanded)
 
   return (
       <div style={blogStyle}>
         "{blog.title}" &nbsp;-&nbsp; {blog.author} &nbsp;
-        <button onClick={onClick}>View</button>
+        <button onClick={onViewClick}>View</button>
         <div style={showWhenExpanded}>
           <p>url: {blog.url}</p>
-          <p>likes: {blog.likes} <button onClick={onLikeClick}>Like</button></p>
+          <p>likes: {blog.likes} <button onClick={onLikeClick({blog})}>Like</button></p>
           <p>user: {blog.user.name}</p>
         </div>
       </div>

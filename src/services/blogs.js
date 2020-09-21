@@ -31,16 +31,17 @@ const createNew = async (blogToAddTitle, blogToAddAuthor, blogToAddUrl, user) =>
   return request.then(response => response.data)
 }
 
-const addLike = async (blogToAddTitle, blogToAddAuthor, blogToAddUrl, user, likes) => {
-  setToken(user.token)
+const addLike = async ({ blog }) => {
+  console.log('AddLike :', blog)
+  setToken(blog.user.token)
   const request =
       await axios
-          .put(baseUrl, {
-            'user': user,
-            'likes': likes,
-            'author': blogToAddAuthor,
-            'title':blogToAddTitle,
-            'url': blogToAddUrl
+          .put(baseUrl + '/' + blog.id, {
+            'user': blog.user.name,
+            'likes': blog.likes + 1,
+            'author': blog.author,
+            'title':blog.title,
+            'url': blog.url
               },
               {
                 headers: {
