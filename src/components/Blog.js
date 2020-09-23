@@ -23,6 +23,16 @@ const Blog = ({ blog, updateBlogs }) => {
           
   }
 
+  const onRemoveClick = async () => {
+    if (window.confirm("Really remove?")) { 
+    console.log('Remove Clicked')
+    }
+    //await blogService
+      //  .addLike({blog})
+    //updateBlogs()
+    
+}
+
   const showWhenExpanded = {
     display: expanded ? '' : 'none'
   }
@@ -35,6 +45,7 @@ const Blog = ({ blog, updateBlogs }) => {
           <p>url: {blog.url}</p>
           <p>likes: {blog.likes} <button onClick={onLikeClick}>Like</button></p>
           <p>user: {blog.user.name}</p>
+          <p><button onClick={onRemoveClick}>Remove</button></p>
         </div>
       </div>
   )
