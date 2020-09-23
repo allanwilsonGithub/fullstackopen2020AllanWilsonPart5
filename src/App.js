@@ -34,6 +34,12 @@ const App = () => {
     )  
   }, [])
 
+  const updateBlogs = async () => {
+    blogService.getAll().then(blogs =>
+      setBlogs( blogs )
+    )  
+  }
+
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogAppUser')
     if (loggedUserJSON) {
@@ -86,7 +92,7 @@ const App = () => {
       {blogs.map(blog => {
           return (
                 <div key={blog.id}>
-                  <Blog blog={blog}/>
+                  <Blog blog={blog} updateBlogs={updateBlogs}/>
                 </div>
             )
         })}
