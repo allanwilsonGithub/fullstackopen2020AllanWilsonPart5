@@ -16,8 +16,8 @@ const Blog = ({ blog, updateBlogs }) => {
     setExpanded(!expanded)
   }
 
-  const onLikeClick = () => {
-          blogService
+  const onLikeClick = async () => {
+          await blogService
               .addLike({blog})
           updateBlogs()
           

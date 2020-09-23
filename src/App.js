@@ -89,7 +89,10 @@ const App = () => {
   const blogDisplay = () => (
       <div>
       <h2>Blogs</h2>
-      {blogs.map(blog => {
+      {blogs.sort(function (a, b) {
+        return a.likes - b.likes;
+      })
+      .map(blog => {
           return (
                 <div key={blog.id}>
                   <Blog blog={blog} updateBlogs={updateBlogs}/>
