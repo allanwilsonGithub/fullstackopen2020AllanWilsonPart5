@@ -31,6 +31,18 @@ const createNew = async (blogToAddTitle, blogToAddAuthor, blogToAddUrl, user) =>
   return request.then(response => response.data)
 }
 
+const deleteBlog = async ({ blog, user }) => {
+  console.log('delBlog', blog)
+  setToken(user.token)
+      await axios
+      .delete(baseUrl + '/' + blog.id, 
+          {
+            headers: {
+              'Authorization': token
+            }
+          })
+}
+
 const addLike = async ({ blog }) => {
   setToken(blog.user.token)
       await axios
@@ -48,4 +60,6 @@ const addLike = async ({ blog }) => {
               })
 }
 
-export default { getAll, setToken, createNew, addLike }
+
+
+export default { getAll, setToken, createNew, addLike, deleteBlog }

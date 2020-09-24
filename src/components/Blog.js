@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import blogService from "../services/blogs";
 
-const Blog = ({ blog, updateBlogs }) => {
+const Blog = ({ blog, updateBlogs, user }) => {
   const [expanded, setExpanded] = useState(false)
 
     const blogStyle = {
@@ -25,16 +25,22 @@ const Blog = ({ blog, updateBlogs }) => {
 
   const onRemoveClick = async () => {
     if (window.confirm("Really remove?")) { 
-    console.log('Remove Clicked')
-    }
-    //await blogService
-      //  .addLike({blog})
-    //updateBlogs()
-    
-}
+    await blogService
+      .deleteBlog({blog, user})
+    updateBlogs()
+}}
 
   const showWhenExpanded = {
     display: expanded ? '' : 'none'
+  }
+  
+  let createdByCurrentUser = false
+  if (user.name === blog.user.name){
+    createdByCurrentUser = true
+  }
+
+  const showIfCurrentUser = {
+    display: createdByCurrentUser ? '' : 'none'
   }
 
   return (
@@ -45,7 +51,7 @@ const Blog = ({ blog, updateBlogs }) => {
           <p>url: {blog.url}</p>
           <p>likes: {blog.likes} <button onClick={onLikeClick}>Like</button></p>
           <p>user: {blog.user.name}</p>
-          <p><button onClick={onRemoveClick}>Remove</button></p>
+          <p><button style={showIfCurrentUser} onClick={onRemoveClick}>Remove</button></p>
         </div>
       </div>
   )

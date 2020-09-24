@@ -95,7 +95,7 @@ const App = () => {
       .map(blog => {
           return (
                 <div key={blog.id}>
-                  <Blog blog={blog} updateBlogs={updateBlogs}/>
+                  <Blog blog={blog} updateBlogs={updateBlogs} user={user}/>
                 </div>
             )
         })}
