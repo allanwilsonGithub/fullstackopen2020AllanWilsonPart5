@@ -3,6 +3,7 @@ import blogService from "../services/blogs"
 import PropTypes from "prop-types"
 
 const Blog = ({ blog, updateBlogs, user }) => {
+  console.log(blog, updateBlogs, user)
   const [expanded, setExpanded] = useState(false)
 
     const blogStyle = {
@@ -44,10 +45,10 @@ const Blog = ({ blog, updateBlogs, user }) => {
   }
 
   return (
-      <div style={blogStyle}>
+      <div style={blogStyle} className='blog'>
         "{blog.title}" &nbsp;-&nbsp; {blog.author} &nbsp;
         <button onClick={onViewClick}>View</button>
-        <div style={showWhenExpanded}>
+        <div style={showWhenExpanded} className="togglableContent">
           <p>url: {blog.url}</p>
           <p>likes: {blog.likes} <button onClick={onLikeClick}>Like</button></p>
           <p>user: {blog.user.name}</p>
