@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import blogService from "../services/blogs"
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types"
 
 const Blog = ({ blog, updateBlogs, user }) => {
   const [expanded, setExpanded] = useState(false)
