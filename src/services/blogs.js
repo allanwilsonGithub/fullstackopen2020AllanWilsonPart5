@@ -14,50 +14,49 @@ const getAll = () => {
 
 const createNew = async (blogToAddTitle, blogToAddAuthor, blogToAddUrl, user) => {
   setToken(user.token)
-  const request = 
+  const request =
   await axios
-  .post(baseUrl, {
-    'title': blogToAddTitle,
-    'author': blogToAddAuthor,
-    'url': blogToAddUrl
-  },
-  {
-    headers: {
-      'Authorization': token
-    }
-  })
+    .post(baseUrl, {
+      'title': blogToAddTitle,
+      'author': blogToAddAuthor,
+      'url': blogToAddUrl
+    },
+    {
+      headers: {
+        'Authorization': token
+      }
+    })
 
-  
   return request.then(response => response.data)
 }
 
 const deleteBlog = async ({ blog, user }) => {
   console.log('delBlog', blog)
   setToken(user.token)
-      await axios
-      .delete(baseUrl + '/' + blog.id, 
-          {
-            headers: {
-              'Authorization': token
-            }
-          })
+  await axios
+    .delete(baseUrl + '/' + blog.id,
+      {
+        headers: {
+          'Authorization': token
+        }
+      })
 }
 
 const addLike = async ({ blog }) => {
   setToken(blog.user.token)
-      await axios
-          .put(baseUrl + '/' + blog.id, {
-            'id': blog.user.name,
-            'likes': blog.likes + 1,
-            'author': blog.author,
-            'title':blog.title,
-            'url': blog.url
-              },
-              {
-                headers: {
-                  'Authorization': token
-                }
-              })
+  await axios
+    .put(baseUrl + '/' + blog.id, {
+      'id': blog.user.name,
+      'likes': blog.likes + 1,
+      'author': blog.author,
+      'title':blog.title,
+      'url': blog.url
+    },
+    {
+      headers: {
+        'Authorization': token
+      }
+    })
 }
 
 
