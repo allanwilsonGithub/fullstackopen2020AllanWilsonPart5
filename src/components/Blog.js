@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import blogService from "../services/blogs";
+import blogService from "../services/blogs"
+import PropTypes from 'prop-types'
 
 const Blog = ({ blog, updateBlogs, user }) => {
   const [expanded, setExpanded] = useState(false)
@@ -19,8 +20,7 @@ const Blog = ({ blog, updateBlogs, user }) => {
   const onLikeClick = async () => {
           await blogService
               .addLike({blog})
-          updateBlogs()
-          
+          updateBlogs()    
   }
 
   const onRemoveClick = async () => {
@@ -55,6 +55,12 @@ const Blog = ({ blog, updateBlogs, user }) => {
         </div>
       </div>
   )
+}
+
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired,
+  updateBlogs: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
 }
 
 export default Blog
