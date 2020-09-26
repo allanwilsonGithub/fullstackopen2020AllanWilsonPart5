@@ -1,3 +1,3 @@
 npm run start
 
-CI=true npm test
+CI=true npm test .
