@@ -21,23 +21,21 @@ beforeEach(() => {
     "id": "5f20297efe38103799d7c8cd"
 }
 
-
-
 const updateBlogs = async () => {
-blogService.getAll().then(blogs =>
-  setBlogs( blogs )
-)  
+  blogService.getAll().then(blogs =>
+    setBlogs( blogs )
+  )  
 }
 
 const user = {
-"username": "allan 789",
-"name": "Allan Wilson 789",
-"id": "5f202921fe38103799d7c8cb"
+  "username": "allan 789",
+  "name": "Allan Wilson 789",
+  "id": "5f202921fe38103799d7c8cb"
 }
 
 component = render(
-<Blog blog={blog} updateBlogs={updateBlogs} user={user}/>
-)
+  <Blog blog={blog} updateBlogs={updateBlogs} user={user}/>
+  )
 })
 
 
@@ -73,23 +71,61 @@ test('clicks view button', () => {
       expect(div).toHaveStyle('')
     })
 
+
+})
+
 test('click like button twice', () => {
 
-  const onLikeClick = jest.fn()
+  const blog = {
+    "title": "Cycling Home Drunk",
+    "author": "Allan Wilson",
+    "url": "http://not-a-good-idea.com",
+    "likes": 1,
+    "user": {
+        "username": "allan 123",
+        "id": "5f22bf010f493d7a7a0a8d09"
+    },
+    "id": "5f20297efe38103799d7c8cd"
+  }
+
+  const updateBlogs = async () => {
+    blogService.getAll().then(blogs =>
+      setBlogs( blogs )
+    )  
+  }
+
+  const user = {
+    "username": "allan 789",
+    "name": "Allan Wilson 789",
+    "id": "5f202921fe38103799d7c8cb"
+  }
+
+  const onLikeClickMock = jest.fn()
+
+  let component = render(
+    <Blog blog={blog} updateBlogs={updateBlogs} user={user} onLikeClick={onLikeClickMock}/>
+  )
+
+  component.debug()
+
+  expect(component.container).toHaveTextContent(
+    'Cycling Home Drunk'
+  )
+
+  const div = component.container.querySelector('.togglableContent')
+
+  expect(div).toHaveStyle('display: none')
 
   const viewButton = component.getByText('View')
   fireEvent.click(viewButton)
-      
-  const div = component.container.querySelector('.togglableContent')
     
   expect(div).toHaveStyle('')
 
   const likeButton = component.getByText('Like')
 
-  expect(onLikeClick.mock.calls).toHaveLength(0)
   fireEvent.click(likeButton)
-  expect(onLikeClick.mock.calls).toHaveLength(1)
+  expect(onLikeClickMock.mock.calls).toHaveLength(100)
   fireEvent.click(likeButton)
-  expect(onLikeClick.mock.calls).toHaveLength(2)
-})
+  expect(onLikeClickMock.mock.calls).toHaveLength(2)
+
 })
