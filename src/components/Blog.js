@@ -19,6 +19,7 @@ const Blog = ({ blog, updateBlogs, user }) => {
   }
 
   const onLikeClick = async () => {
+          updateBlogs()    // This extra call is added specifically to allow me to learn to mock in blog.test.js
           await blogService
               .addLike({blog})
           updateBlogs()    

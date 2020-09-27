@@ -88,11 +88,7 @@ test('click like button twice', () => {
     "id": "5f20297efe38103799d7c8cd"
   }
 
-  const updateBlogs = async () => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )  
-  }
+  const updateBlogs = jest.fn()
 
   const user = {
     "username": "allan 789",
@@ -100,10 +96,8 @@ test('click like button twice', () => {
     "id": "5f202921fe38103799d7c8cb"
   }
 
-  const onLikeClickMock = jest.fn()
-
   let component = render(
-    <Blog blog={blog} updateBlogs={updateBlogs} user={user} onLikeClick={onLikeClickMock}/>
+    <Blog blog={blog} updateBlogs={updateBlogs} user={user}/>
   )
 
   component.debug()
@@ -124,8 +118,8 @@ test('click like button twice', () => {
   const likeButton = component.getByText('Like')
 
   fireEvent.click(likeButton)
-  expect(onLikeClickMock.mock.calls).toHaveLength(100)
+  expect(updateBlogs.mock.calls).toHaveLength(1)
   fireEvent.click(likeButton)
-  expect(onLikeClickMock.mock.calls).toHaveLength(2)
+  expect(updateBlogs.mock.calls).toHaveLength(2)
 
 })
