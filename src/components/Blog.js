@@ -3,7 +3,7 @@ import blogService from "../services/blogs"
 import PropTypes from "prop-types"
 
 const Blog = ({ blog, updateBlogs, user }) => {
-  console.log(blog, updateBlogs, user)
+
   const [expanded, setExpanded] = useState(false)
 
     const blogStyle = {
