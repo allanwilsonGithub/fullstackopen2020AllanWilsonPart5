@@ -1,14 +1,12 @@
 import React, {useState} from 'react'
-import blogService from "../services/blogs";
 
-const CreateBlogForm = ({ createBlog, setErrorMessage, user }) => {
+const CreateBlogForm = ({ setErrorMessage, user, createNewBlog }) => {
     const [blogToAddTitle, setblogToAddTitle] = useState('')
     const [blogToAddAuthor, setBlogToAddAuthor] = useState('')
     const [blogToAddUrl, setBlogToAddUrl] = useState('')
 
     const addBlog = () => {
-        blogService
-            .createNew(blogToAddTitle, blogToAddAuthor, blogToAddUrl, user)
+        createNewBlog(blogToAddTitle, blogToAddAuthor, blogToAddUrl, user)  // CreateNewBlog was added only so that the prop can be mocked in CreateBlogForm.tests.js for this course
 
         setErrorMessage(`New blog added!`)
         setTimeout(() => {
@@ -24,6 +22,7 @@ const CreateBlogForm = ({ createBlog, setErrorMessage, user }) => {
                 <div>
                     Title&nbsp;
                     <input
+                        id='title'
                         type="text"
                         value={blogToAddTitle}
                         name="Title"
@@ -33,18 +32,20 @@ const CreateBlogForm = ({ createBlog, setErrorMessage, user }) => {
                 <div>
                     Author&nbsp;
                     <input
+                        id='author'
                         type="text"
                         value={blogToAddAuthor}
-                        name="Title"
+                        name="Author"
                         onChange={({ target }) => setBlogToAddAuthor(target.value)}
                     />
                 </div>
                 <div>
                     URL&nbsp;
                     <input
+                        id='url'
                         type="text"
                         value={blogToAddUrl}
-                        name="Title"
+                        name="URL"
                         onChange={({ target }) => setBlogToAddUrl(target.value)}
                     />
                 </div>

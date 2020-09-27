@@ -100,8 +100,6 @@ test('click like button twice', () => {
     <Blog blog={blog} updateBlogs={updateBlogs} user={user}/>
   )
 
-  component.debug()
-
   expect(component.container).toHaveTextContent(
     'Cycling Home Drunk'
   )
