@@ -49,7 +49,7 @@ const CreateBlogForm = ({ setErrorMessage, user, createNewBlog }) => {
                         onChange={({ target }) => setBlogToAddUrl(target.value)}
                     />
                 </div>
-                <button type="submit">Create</button>
+                <button id='createBlogButton' type="submit">Create</button>
             </form>
         </div>
     )

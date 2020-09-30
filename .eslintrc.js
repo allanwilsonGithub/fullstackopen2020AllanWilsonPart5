@@ -4,6 +4,7 @@ module.exports = {
     'commonjs': true,
     'jest': true,
     'node': true
+    "cypress/globals": true
   },
   'extends': 'eslint:recommended',
   'parserOptions': {
@@ -34,6 +35,9 @@ module.exports = {
     ],
     'arrow-spacing': [
       'error', { 'before': true, 'after': true }
+    ],
+    "plugins": [
+        "react", "jest", "cypress"
     ],
     'no-console': 0
   }
