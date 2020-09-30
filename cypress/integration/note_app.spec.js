@@ -15,14 +15,27 @@ describe('Blog app', function() {
     cy.contains('Log in to application')
   })
 
-  it('user can login', function () {
+  describe('Login',function() {
+    it('succeeds with correct credentials', function () {
+      cy.contains('login').click()
+      cy.get('#username').type('CypressTestUser')
+      cy.get('#password').type('CypressTestPassword')
+      cy.get('#login-button').click()
+
+      cy.contains('Cypress Test User logged in')
+  })
+
+  it('fails with wrong credentials', function () {
     cy.contains('login').click()
     cy.get('#username').type('CypressTestUser')
-    cy.get('#password').type('CypressTestPassword')
+    cy.get('#password').type('wrong')
     cy.get('#login-button').click()
 
-    cy.contains('Cypress Test User logged in')
-  })
+    cy.get('.error')
+    .should('contain', 'Wrong username or password')
+    .and('have.css', 'color', 'rgb(138, 43, 226)')
+
+    })
 
   it('new blog can be created', function () {
     cy.contains('login').click()
@@ -39,18 +52,5 @@ describe('Blog app', function() {
     cy.get('#createBlogButton').click()
     })
 
-
-  it('login fails with wrong password', function () {
-    cy.contains('login').click()
-    cy.get('#username').type('CypressTestUser')
-    cy.get('#password').type('wrong')
-    cy.get('#login-button').click()
-
-    cy.get('.error').contains('Wrong username or password')
-    cy.get('html').should('not.contain', 'Cypress Test User logged in')
-
-    })
-
-
-
+})
 })
