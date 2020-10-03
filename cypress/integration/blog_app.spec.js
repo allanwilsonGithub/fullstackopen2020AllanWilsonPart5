@@ -35,7 +35,6 @@ describe('Blog app', function() {
       .should('contain', 'Wrong username or password')
       .and('have.css', 'color', 'rgb(138, 43, 226)')
     })
-})
 
   describe('When logged in',function() {
     beforeEach(function() {
@@ -53,8 +52,23 @@ describe('Blog app', function() {
     cy.get('#author').type('Cypress automated system test')
     cy.get('#url').type('https://www.iwantoneofthose.com/')
     cy.get('#createBlogButton').click()
-    //cy.contains('A new blog created by a Cypress test')
+    cy.contains('A new blog created by a Cypress test')
     })
 
+  it('user can like a blog', function () {
+    cy.contains('New Blog').click()
+    cy.contains('Create new blog')
+    cy.get('#title').type('A 2nd new blog created by a Cypress test')
+    cy.get('#author').type('Cypress automated system test')
+    cy.get('#url').type('https://www.iwantoneofthose.com/')
+    cy.get('#createBlogButton').click()
+    cy.contains('A 2nd new blog created by a Cypress test')
+    cy.get('#blogViewButton').click()
+    cy.contains('likes: 0')
+    cy.get('#likeButton').click()
+    cy.contains('likes: 1')
+    })
+
+  })
 })
 })

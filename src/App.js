@@ -144,7 +144,7 @@ const App = () => {
 
         <Togglable buttonLabel="New Blog">
           <CreateBlogForm
-              createBlog setErrorMessage={setErrorMessage} user={user} createNewBlog={blogService.createNew}/>
+              setErrorMessage={setErrorMessage} user={user} createNewBlog={blogService.createNew}/>
         </Togglable>
 
         {blogDisplay()}

@@ -48,10 +48,10 @@ const Blog = ({ blog, updateBlogs, user }) => {
   return (
       <div style={blogStyle} className='blog'>
         "{blog.title}" &nbsp;-&nbsp; {blog.author} &nbsp;
-        <button onClick={onViewClick}>View</button>
+        <button id="blogViewButton" onClick={onViewClick}>View</button>
         <div style={showWhenExpanded} className="togglableContent">
           <p>url: {blog.url}</p>
-          <p>likes: {blog.likes} <button onClick={onLikeClick}>Like</button></p>
+          <p>likes: {blog.likes} <button id="likeButton" onClick={onLikeClick}>Like</button></p>
           <p>user: {blog.user.name}</p>
           <p><button style={showIfCurrentUser} onClick={onRemoveClick}>Remove</button></p>
         </div>

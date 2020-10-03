@@ -27,11 +27,11 @@ const createNew = async (blogToAddTitle, blogToAddAuthor, blogToAddUrl, user) =>
       }
     })
 
-  return request.then(response => response.data)
+  return request.data
 }
 
+
 const deleteBlog = async ({ blog, user }) => {
-  console.log('delBlog', blog)
   setToken(user.token)
   await axios
     .delete(baseUrl + '/' + blog.id,

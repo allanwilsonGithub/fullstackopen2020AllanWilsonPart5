@@ -5,13 +5,13 @@ const CreateBlogForm = ({ setErrorMessage, user, createNewBlog }) => {
     const [blogToAddAuthor, setBlogToAddAuthor] = useState('')
     const [blogToAddUrl, setBlogToAddUrl] = useState('')
 
-    const addBlog = () => {
-        createNewBlog(blogToAddTitle, blogToAddAuthor, blogToAddUrl, user)  // CreateNewBlog was added only so that the prop can be mocked in CreateBlogForm.tests.js for this course
-
+    const addBlog = async () => {
+        await createNewBlog(blogToAddTitle, blogToAddAuthor, blogToAddUrl, user)  // CreateNewBlog was added only so that the prop can be mocked in CreateBlogForm.tests.js for this course
         setErrorMessage(`New blog added!`)
         setTimeout(() => {
             setErrorMessage(null)
         }, 5000)
+
 
     }
 
