@@ -53,7 +53,7 @@ const Blog = ({ blog, updateBlogs, user }) => {
           <p>url: {blog.url}</p>
           <p>likes: {blog.likes} <button id="likeButton" onClick={onLikeClick}>Like</button></p>
           <p>user: {blog.user.name}</p>
-          <p><button style={showIfCurrentUser} onClick={onRemoveClick}>Remove</button></p>
+          <p><button id="removeButton" style={showIfCurrentUser} onClick={onRemoveClick}>Remove</button></p>
         </div>
       </div>
   )
