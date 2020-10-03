@@ -90,7 +90,7 @@ const App = () => {
       <div>
       <h2>Blogs</h2>
       {blogs.sort(function (a, b) {
-        return a.likes - b.likes;
+        return b.likes - a.likes;
       })
       .map(blog => {
           return (
