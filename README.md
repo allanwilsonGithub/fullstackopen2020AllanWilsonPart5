@@ -43,3 +43,6 @@ test to ensure adding a blog fails with the proper status code 401 Unauthorized 
 ################################################
 Continuing now with:
 https://fullstackopen.com/en/part7/webpack
+
+ssh -T git@github.com
+eval "$(ssh-agent -s)"
